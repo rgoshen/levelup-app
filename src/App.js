@@ -1,7 +1,12 @@
+import { MoviesList } from './MoviesList';
 import './App.css';
 
 function App() {
-  return <div className='App'></div>;
+  return (
+    <div className='App'>
+      <MoviesList />
+    </div>
+  );
 }
 
 export default App;
