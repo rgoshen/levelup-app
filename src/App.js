@@ -4,15 +4,15 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <HelloWorld />
-        <HelloWorld />
+        <HelloWorld name='Rick' />
+        <HelloWorld name='World' />
       </header>
     </div>
   );
 }
 
-function HelloWorld() {
-  return <h1>Hello World!</h1>;
+function HelloWorld(props) {
+  return <h1>Hello {props.name}!</h1>;
 }
 
 export default App;
