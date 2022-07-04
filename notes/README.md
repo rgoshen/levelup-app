@@ -1,0 +1,680 @@
+# React for Everyone
+
+[ReactJS Docs](https://reactjs.org/docs/getting-started.html)
+
+## TOC
+
+1. [Understanding Components](#understanding-components)
+2. [What are Props](#what-are-props)
+3. [State in Components with useState](#state-in-cmponents-with-usestate)
+4. [Conditional Rendering](#conditional-rendering)
+5. [Controlled Inputs](#controlled-inputs)
+6. [Looping in React](#looping-in-react)
+7. [Basic Filtering with State](#basic-filtering-with-state)
+8. [Component Creation Flow](#component-creation-flow)
+9. [PropTypes](#proptypes)
+10. [Refs](#refs)
+
+## Abbreviations
+
+- \*[DOM]: Document Object Model
+
+## Understanding Components
+
+- starting in React 18, files do not need `import React from 'react';` at the top of the file anymore.
+	- there is a transformer inside of babel that removes the requirement to have import React statement
+
+```javascript
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <header className='App-header'>
+        <HelloWorld/>
+        <HelloWorld/>
+      </header>
+    </div>
+  );
+}
+
+function HelloWorld() {
+  return (
+    <h1>
+      Hello World!
+    </h1>
+  );
+}
+
+export default App;
+```
+
+## What Are Props
+
+Props are the way that we pass data between parent and children components.
+
+```javascript
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <header className='App-header'>
+        <HelloWorld name='Rick' greeting='Yo' />
+        <HelloWorld name='World' />
+      </header>
+    </div>
+  );
+}
+
+function HelloWorld(props) {
+  return (
+    <h1>
+      {props.greeting} {props.name}!
+    </h1>
+  );
+}
+export default App;
+
+```
+
+## Default Props
+
+Default props are a default value that we can give our props in case a value is not given.
+
+```javascript
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <header className='App-header'>
+        <HelloWorld name='Rick' greeting='Yo' />
+        <HelloWorld name='World' />
+      </header>
+    </div>
+  );
+}
+
+function HelloWorld({ name, greeting = 'Hello' }) {
+  return (
+    <h1>
+      {greeting} {name}!
+    </h1>
+  );
+}
+
+export default App;
+
+```
+
+- we can also tell out component what type of props to expect
+
+```javascript
+import PropTypes  from 'prop-types';
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <header className='App-header'>
+        <HelloWorld name='Rick' greeting='Yo' />
+        <HelloWorld name='World' />
+      </header>
+    </div>
+  );
+}
+
+function HelloWorld({ name, greeting = 'Hello' }) {
+  return (
+    <h1>
+      {greeting} {name}!
+    </h1>
+  );
+}
+
+HelloWorld.propTypes = {
+  name: PropTypes.string.isRequired,
+  greeting: PropTypes.string,
+};
+
+export default App;
+```
+
+## State in Components with useState
+
+In order to use state in a component, you need to import `useState` hook then you `const [state, setState] = useState(defaultState);`
+
+ex.: `const [count, setCount] = useState(0);`
+
+_src/App.js_
+
+```javascript
+import PropTypes from 'prop-types';
+import { Counter } from './Counter';
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <Counter />
+    </div>
+  );
+}
+
+function HelloWorld({ name, greeting = 'Hello' }) {
+  return (
+    <h1>
+      {greeting} {name}!
+    </h1>
+  );
+}
+
+HelloWorld.propTypes = {
+  name: PropTypes.string.isRequired,
+  greeting: PropTypes.string,
+};
+
+export default App;
+```
+
+_src/Counter.js_
+
+```javascript
+import { useState } from 'react';
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h3>{count}</h3>
+      <button
+        onClick={() => {
+          setCount(count - 1);
+        }}
+      >
+        -
+      </button>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        +
+      </button>
+    </div>
+  );
+}
+```
+
+## Conditional Rendering
+
+- using state
+
+_src/Accordion.js_
+
+```javascript
+import { useState } from 'react';
+
+export function Accordion() {
+  const [isToggled, setIsToggled] = useState(false);
+
+  // less common way to do this
+  //   const showMe = isToggled ? <h3>Show Me</h3> : null;
+
+  return (
+    <div>
+      {/* {showMe} */}
+      {/* {isToggled ? <h3>Show Me</h3> : null} */}
+      {isToggled && <h3>Show Me</h3>}
+      <button onClick={() => setIsToggled(!isToggled)}>Toggle</button>
+    </div>
+  );
+}
+
+```
+
+_src/App.js_
+
+```javascript
+import { Accordion } from './Accordion';
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <Accordion />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Controlled Inputs
+
+Controlled inputs allow us to take control of our forms and inputs.
+
+- strength of controlled inputs is once you get teh value from an input, you can run conditional or any manipulation you really want.  See example below.
+- basically you have control over its value
+
+_src/Input.js_
+
+```javascript
+import { useState } from 'react';
+
+export function Input() {
+  const [inputValue, setInputValue] = useState('');
+
+  return (
+    <div>
+      {inputValue && <p>{inputValue}</p>}
+      <input
+        value={inputValue}
+        // Basic
+        // onChange={(e) => setInputValue(e.target.value)}
+        onChange={(e) => {
+          if (!e.target.value.includes('t')) {
+            setInputValue(e.target.value);
+          }
+        }}
+      />
+    </div>
+  );
+}
+```
+
+_src/App.js_
+
+```javascript
+import { Input } from './Input';
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <Input />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Looping in React
+
+React uses the javascript map method to loop through arrays.
+
+_src/MoviesList.js_
+
+```javascript
+const movies = [
+  {
+    name: '36th Chamber',
+  },
+  {
+    name: 'Man of Iron',
+  },
+  {
+    name: '5 Deadly Venoms',
+  },
+];
+
+export function MoviesList() {
+  return (
+    <div>
+      <ul>
+      // loop
+        {movies.map((movie) => {
+          return <li key={movie.name}>{movie.name}</li>;
+        })}
+      </ul>
+    </div>
+  );
+}
+```
+
+_src/App.js_
+
+```javascript
+import { MoviesList } from './MoviesList';
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <MoviesList />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Basic Filtering with State
+
+_src/MovieList.js_
+
+```javascript
+import { useState } from 'react';
+
+const movies = [
+  {
+    name: '36th Chamber',
+  },
+  {
+    name: 'Man of Iron',
+  },
+  {
+    name: '5 Deadly Venoms',
+  },
+  {
+    name: 'Iron Man',
+  },
+];
+
+export function MoviesList() {
+  const [filter, setFilter] = useState('');
+  return (
+    <div>
+      <label>
+        Filter:
+        <input value={filter} onChange={(e) => setFilter(e.target.value)} />
+      </label>
+      <ul>
+        {movies
+          .filter((movie) =>
+            movie.name.toLowerCase().includes(filter.toLowerCase())
+          )
+          .map((movie) => (
+            <li key={movie.name}>{movie.name}</li>
+          ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+_src/App.js_
+
+
+```javascript
+import { MoviesList } from './MoviesList';
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <MoviesList />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## Component Creation Flow
+
+- when two components needs access to the same state, you need to "raise up" state into their parent component and then pass in as props to those child components
+- when a child component needs to "control" the parent component based on state, you need to "raise up" state to the parent component
+- reason: everything in React flows down and not up, therefore, state needs to be "raised up" in order to obey that rule of React
+
+_src/App.js_
+
+```javascript
+import { MoviesList } from './movies/MoviesList';
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <MoviesList />
+    </div>
+  );
+}
+
+export default App;
+```
+
+_src/movies/MovieList.js_
+
+```javascript
+import { useState } from 'react';
+import { Movie } from './Movie';
+import { Filter } from '../Filter';
+
+const movies = [
+  {
+    name: '36th Chamber',
+  },
+  {
+    name: 'Man of Iron',
+  },
+  {
+    name: '5 Deadly Venoms',
+  },
+  {
+    name: 'Iron Man',
+  },
+];
+
+export function MoviesList() {
+  const [filter, setFilter] = useState('');
+  return (
+    <div>
+      <Filter filter={filter} setFilter={setFilter} />
+      <ul>
+        {movies
+          .filter((movie) =>
+            movie.name.toLowerCase().includes(filter.toLowerCase())
+          )
+          .map((movie) => (
+            <Movie key={movie.name} movie={movie} />
+          ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+_src/movies/Movie.js_
+
+```javascript
+export function Movie({ movie }) {
+  return <li>{movie.name}</li>;
+}
+```
+
+_src/Filter.js_
+
+```javascript
+export function Filter({ filter, setFilter }) {
+  return (
+    <label>
+      Filter:
+      <input value={filter} onChange={(e) => setFilter(e.target.value)} />
+    </label>
+  );
+}
+```
+
+## PropTypes
+
+Prop types can help our components know exactly what type of props they should accept and throw errors when the wrong props are sent to them.
+
+- make components "smart"
+
+References:
+
+- [React Docs propTypes](https://reactjs.org/docs/typechecking-with-proptypes.html)
+- [NPM prop-types](https://www.npmjs.com/package/prop-types)
+
+_src/App.js_
+
+```javascript
+import { MoviesList } from './movies/MoviesList';
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <MoviesList />
+    </div>
+  );
+}
+
+export default App;
+```
+
+_src/movies/MovieList.js_
+
+```javascript
+import { useState } from 'react';
+import { Movie } from './Movie';
+import { Filter } from '../Filter';
+
+const movies = [
+  {
+    name: '36th Chamber',
+  },
+  {
+    name: 'Man of Iron',
+  },
+  {
+    name: '5 Deadly Venoms',
+  },
+  {
+    name: 'Iron Man',
+  },
+];
+
+export function MoviesList() {
+  const [filter, setFilter] = useState('');
+  return (
+    <div>
+      <Filter filter={filter} setFilter={setFilter} />
+      <ul>
+        {movies
+          .filter((movie) =>
+            movie.name.toLowerCase().includes(filter.toLowerCase())
+          )
+          .map((movie) => (
+            <Movie key={movie.name} movie={movie} />
+          ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+_src/movies/Movie.js_
+
+```javascript
+export function Movie({ movie }) {
+  return <li>{movie.name}</li>;
+}
+
+Movie.propTypes = {
+  movie: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};
+```
+
+_src/Filter.js_
+
+```javascript
+export function Filter({ filter, setFilter }) {
+  return (
+    <label>
+      Filter:
+      <input value={filter} onChange={(e) => setFilter(e.target.value)} />
+    </label>
+  );
+}
+
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  setFilter: PropTypes.func.isRequired,
+};
+```
+
+## Refs
+
+refs have changed a lot throughout the lifespan of React but are currently used with the useRef hook.
+
+- `useRef` returns a mutable ref object whose `.current` property is initialized to the passed argument (`initialValue`). The returned object will persist for the full lifetime of the component.
+
+Uses:
+
+- to get access to the actual DOM and elements on in the DOM
+	- outside the normal React flow
+	- when a ref updates, this does not trigger a rerender of the DOM
+	- can use this to store information and change information without rerendering the component
+- allows access to actual DOM objects
+- "dumb" inputs as to the controlled inputs in a previous notes
+
+`const varName = useRef(initialValue);`
+
+- more simple than the filter example above
+
+Disadvantages:
+
+- can not control rerenders
+- no control over the input being used in the text box
+
+_src/movies/MovieList.js_
+
+```javascript
+import { useState, useRef } from 'react';
+import { Movie } from './Movie';
+import { Filter } from '../Filter';
+
+const movies = [
+  {
+    name: '36th Chamber',
+  },
+  {
+    name: 'Man of Iron',
+  },
+  {
+    name: '5 Deadly Venoms',
+  },
+  {
+    name: 'Iron Man',
+  },
+];
+
+export function MoviesList() {
+  const [filter, setFilter] = useState('');
+  const ulRef = useRef(null);
+  const ref = useRef(null);
+
+  console.log('ulRef', ulRef);
+
+  return (
+    <div ref={ulRef}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(ref.current.value);
+        }}
+      >
+        <input ref={ref} />
+        <button>Submit</button>
+      </form>
+      <Filter filter={filter} setFilter={setFilter} />
+      <ul>
+        {movies
+          .filter((movie) =>
+            movie.name.toLowerCase().includes(filter.toLowerCase())
+          )
+          .map((movie) => (
+            <Movie key={movie.name} movie={movie} />
+          ))}
+      </ul>
+    </div>
+  );
+}
+```
