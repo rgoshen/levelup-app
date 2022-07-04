@@ -1,4 +1,4 @@
-import { MoviesList } from './MoviesList';
+import { MoviesList } from './movies/MoviesList';
 import './App.css';
 
 function App() {
