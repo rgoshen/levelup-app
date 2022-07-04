@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const movies = [
   {
     name: '36th Chamber',
@@ -8,15 +10,27 @@ const movies = [
   {
     name: '5 Deadly Venoms',
   },
+  {
+    name: 'Iron Man',
+  },
 ];
 
 export function MoviesList() {
+  const [filter, setFilter] = useState('');
   return (
     <div>
+      <label>
+        Filter:
+        <input value={filter} onChange={(e) => setFilter(e.target.value)} />
+      </label>
       <ul>
-        {movies.map((movie) => {
-          return <li key={movie.name}>{movie.name}</li>;
-        })}
+        {movies
+          .filter((movie) =>
+            movie.name.toLowerCase().includes(filter.toLowerCase())
+          )
+          .map((movie) => (
+            <li key={movie.name}>{movie.name}</li>
+          ))}
       </ul>
     </div>
   );
