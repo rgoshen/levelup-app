@@ -1,3 +1,4 @@
+import { PropTypes } from 'react';
 import './App.css';
 
 function App() {
@@ -18,5 +19,10 @@ function HelloWorld({ name, greeting = 'Hello' }) {
     </h1>
   );
 }
+
+HelloWorld.propTypes = {
+  name: PropTypes.string.isRequired,
+  greeting: PropTypes.string,
+};
 
 export default App;
