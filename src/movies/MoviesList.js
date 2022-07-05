@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Movie } from './Movie';
 import { Filter } from '../Filter';
 
@@ -19,6 +19,10 @@ const movies = [
 
 export function MoviesList() {
   const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    console.log('hit effect');
+  }, [filter]);
 
   return (
     <div>

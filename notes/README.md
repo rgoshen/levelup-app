@@ -14,6 +14,7 @@
 8. [Component Creation Flow](#component-creation-flow)
 9. [PropTypes](#proptypes)
 10. [Refs](#refs)
+11. [useEffect 101](#useeffect-101)
 
 ## Abbreviations
 
@@ -664,6 +665,62 @@ export function MoviesList() {
         <input ref={ref} />
         <button>Submit</button>
       </form>
+      <Filter filter={filter} setFilter={setFilter} />
+      <ul>
+        {movies
+          .filter((movie) =>
+            movie.name.toLowerCase().includes(filter.toLowerCase())
+          )
+          .map((movie) => (
+            <Movie key={movie.name} movie={movie} />
+          ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+## useEffect 101
+
+This is a powerful hook and hook helps us to perform actions when a component mount, unmounts, and updates.
+
+- basically the ability to trigger side effects
+- you can tell `useEffect` when to run
+- `useEffect(() => {}, [])`
+	- the empty array after the arrow function tells `useEffect` to run only the first time the component renders (on `componentDidMount`)
+	- if you put some state in the array such as filter, then it would run the `useEffect` when the filter is updated
+
+_src/movies/MoviesList.js_
+
+```javascript
+import { useState, useEffect } from 'react';
+import { Movie } from './Movie';
+import { Filter } from '../Filter';
+
+const movies = [
+  {
+    name: '36th Chamber',
+  },
+  {
+    name: 'Man of Iron',
+  },
+  {
+    name: '5 Deadly Venoms',
+  },
+  {
+    name: 'Iron Man',
+  },
+];
+
+export function MoviesList() {
+  const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    console.log('hit effect');
+  }, [filter]);
+
+  return (
+    <div>
       <Filter filter={filter} setFilter={setFilter} />
       <ul>
         {movies
