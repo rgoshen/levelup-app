@@ -50,6 +50,8 @@ function HelloWorld() {
 export default App;
 ```
 
+[top](#toc)
+
 ## What Are Props
 
 Props are the way that we pass data between parent and children components.
@@ -78,6 +80,8 @@ function HelloWorld(props) {
 export default App;
 
 ```
+
+[top](#toc)
 
 ## Default Props
 
@@ -141,6 +145,8 @@ HelloWorld.propTypes = {
 
 export default App;
 ```
+
+[top](#toc)
 
 ## State in Components with useState
 
@@ -209,6 +215,8 @@ export function Counter() {
 }
 ```
 
+[top](#toc)
+
 ## Conditional Rendering
 
 - using state
@@ -252,6 +260,8 @@ function App() {
 
 export default App;
 ```
+
+[top](#toc)
 
 ## Controlled Inputs
 
@@ -303,6 +313,8 @@ function App() {
 export default App;
 ```
 
+[top](#toc)
+
 ## Looping in React
 
 React uses the javascript map method to loop through arrays.
@@ -352,6 +364,8 @@ function App() {
 
 export default App;
 ```
+
+[top](#toc)
 
 ## Basic Filtering with State
 
@@ -414,6 +428,8 @@ function App() {
 
 export default App;
 ```
+
+[top](#toc)
 
 ## Component Creation Flow
 
@@ -499,6 +515,8 @@ export function Filter({ filter, setFilter }) {
   );
 }
 ```
+
+[top](#toc)
 
 ## PropTypes
 
@@ -601,6 +619,8 @@ Filter.propTypes = {
 };
 ```
 
+[top](#toc)
+
 ## Refs
 
 refs have changed a lot throughout the lifespan of React but are currently used with the useRef hook.
@@ -680,6 +700,8 @@ export function MoviesList() {
 }
 ```
 
+[top](#toc)
+
 ## useEffect 101
 
 This is a powerful hook and hook helps us to perform actions when a component mount, unmounts, and updates.
@@ -735,3 +757,5 @@ export function MoviesList() {
   );
 }
 ```
+
+[top](#toc)
