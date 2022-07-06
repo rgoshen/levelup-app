@@ -13,7 +13,6 @@ export function Movie({ movie, config }) {
             className='movie-poster'
           />
         )}
-        <h3 className='movie-title'>{movie.title}</h3>
       </Link>
     </li>
   );
