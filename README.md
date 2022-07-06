@@ -16,7 +16,7 @@ This project is a single-page React basic movie list app fetching movies from [T
 
 ## Demo
 
-[demo](/readme/images/movies_list.gif)
+![demo](/readme/images/movies_list.gif)
 
 ## Support
 
