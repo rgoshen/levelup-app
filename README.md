@@ -18,13 +18,12 @@ This project is a single-page React basic movie list app fetching movies from [T
 
 ![demo](/readme/images/movies_list.gif)
 
-## Support
-
-For support, email fake@fake.com or join our Slack channel.
-
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![movies_list](/readme/images/movies_list.png)
+![filtered_list](readme/images/filtered_list.png)
+![strange_details](readme/images/strange_movie_detail.png)
+![turning_red_details](readme/images/turning_red_movie_detail.png)
 
 ## Roadmap
 
