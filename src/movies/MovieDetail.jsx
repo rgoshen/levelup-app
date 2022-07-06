@@ -45,11 +45,11 @@ export function MovieDetail() {
         <div className='movie-detail-info'>
           <h1 className='movie-detail-title'>{movie.title}</h1>
           <p className='movie-detail-desc'>{movie.overview}</p>
-          <ul className='movie-detail-genres-list'>
+          <p className='movie-detail-genres-list'>
             {movie.genres.map((genre) => (
-              <li key={genre.id}>{genre.name}</li>
+              <span key={genre.id}>{genre.name} </span>
             ))}
-          </ul>
+          </p>
         </div>
       </div>
     </div>
