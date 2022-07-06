@@ -17,6 +17,8 @@
 11. [useEffect 101](#useeffect-101)
 12. [React Router v5](#react-router-v5)
 
+ Click on [Project](https://github.com/rgoshen/levelup-app) to access the GitHub Project
+
 ## Abbreviations
 
 - \*[DOM]: Document Object Model
@@ -766,5 +768,75 @@ export function MoviesList() {
 [React Router](https://reactrouter.com/) reference
 
 Routing is necessary for larger applications with multiple pages
+
+_src/App.js_
+
+```javascript
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { MoviesList } from './movies/MoviesList';
+import { MovieDetail } from './movies/MovieDetail';
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <Router>
+        <Routes>
+          <Route path='/' element={<MoviesList />} />
+        </Routes>
+        <Routes>
+          <Route path='details' element={<MovieDetail />} />
+        </Routes>
+      </Router>
+    </div>
+  );
+}
+
+export default App;
+```
+
+_src/movies/Movie.jsx_
+
+```javascript
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import './Movie.css';
+
+export function Movie({ movie, config }) {
+  return (
+    <li>
+      <Link to='details'>
+        {config.images.base_url && (
+          <img
+            src={config.images?.base_url + 'w342' + movie.poster_path}
+            alt={movie.title + ' Poster'}
+            className='movie-poster'
+          />
+        )}
+        <h3 className='movie-title'>{movie.title}</h3>
+      </Link>
+    </li>
+  );
+}
+
+Movie.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    poster_path: PropTypes.string.isRequired,
+  }).isRequired,
+};
+```
+
+_/src/movies/MovieDetail.jsx_
+
+```javascript
+export function MovieDetail() {
+  return (
+    <div>
+      <h1>Movie Detail!</h1>
+    </div>
+  );
+}
+```
 
 [top](#toc)
