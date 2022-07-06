@@ -32,7 +32,7 @@ export function MoviesList() {
             movie.title.toLowerCase().includes(filter.toLowerCase())
           )
           .map((movie) => (
-            <Movie key={movie.title} movie={movie} />
+            <Movie key={movie.id} movie={movie} />
           ))}
       </ul>
     </div>
