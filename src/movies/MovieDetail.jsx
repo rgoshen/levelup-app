@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import './MovieDetail.css';
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie/';
-const API_KEY = '?api_key=9c32f397fdb4d58982d492124e77250a';
+const API_KEY = `?api_key=${process.env.REACT_APP_MOVIE_API}`;
 const IMAGE_URL = 'http://image.tmdb.org/t/p/';
 const BACKDROP_SIZE = 'original';
 const POSTER_SIZE = 'w342';

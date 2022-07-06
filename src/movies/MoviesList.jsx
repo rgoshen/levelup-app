@@ -3,9 +3,8 @@ import { Movie } from './Movie';
 import { Filter } from '../Filter';
 import './MoviesList.css';
 
-const API_URL =
-  'https://api.themoviedb.org/3/discover/movie?api_key=9c32f397fdb4d58982d492124e77250a&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate';
-const CONFIG_URL = `https://api.themoviedb.org/3/configuration?api_key=9c32f397fdb4d58982d492124e77250a`;
+const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_MOVIE_API}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`;
+const CONFIG_URL = `https://api.themoviedb.org/3/configuration?api_key=${process.env.REACT_APP_MOVIE_API}`;
 
 export function MoviesList() {
   const [filter, setFilter] = useState('');
