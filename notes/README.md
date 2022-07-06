@@ -15,6 +15,7 @@
 9. [PropTypes](#proptypes)
 10. [Refs](#refs)
 11. [useEffect 101](#useeffect-101)
+12. [React Router v5](#react-router-v5)
 
 ## Abbreviations
 
@@ -757,5 +758,13 @@ export function MoviesList() {
   );
 }
 ```
+
+[top](#toc)
+
+## React Router v5
+
+[React Router](https://reactrouter.com/) reference
+
+Routing is necessary for larger applications with multiple pages
 
 [top](#toc)
