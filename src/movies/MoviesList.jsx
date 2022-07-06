@@ -33,8 +33,8 @@ export function MoviesList() {
   };
 
   useEffect(() => {
-    getMovies();
     getConfig();
+    getMovies();
   }, []);
 
   return (
