@@ -1,0 +1,10 @@
+.filter-label {
+  font-weight: bold;
+}
+
+.filter-input {
+  color: whitesmoke;
+  background-color: transparent;
+  border-radius: 5px;
+  margin: 5px;
+}
