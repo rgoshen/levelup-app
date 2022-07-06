@@ -9,7 +9,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: linear-gradient(#333333, #222222);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(86, 86, 91, 1) 26%,
+    rgba(155, 156, 157, 1) 100%
+  );
   height: 100%;
   color: whitesmoke;
 }

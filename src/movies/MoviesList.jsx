@@ -38,6 +38,7 @@ export function MoviesList() {
 
   return (
     <div>
+      <h1 className='movies-list-title'>Movies List</h1>
       <Filter filter={filter} setFilter={setFilter} />
       <ul className='movies-list'>
         {movies
