@@ -1,5 +1,7 @@
 # Movie List
 
+[Live Version](https://rgoshen.github.io/movies_list/)
+
 This project is a single-page React basic movie list app fetching movies from [The Movie Database](https://www.themoviedb.org/) API.
 
 ## Acknowledgements
@@ -16,7 +18,7 @@ This project is a single-page React basic movie list app fetching movies from [T
 
 ## Demo
 
-![demo](/readme/images/movies_list.gif)
+[![demo](/readme/images/movies_list.gif)](https://rgoshen.github.io/movies_list/)
 
 ## Screenshots
 
