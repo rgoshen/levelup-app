@@ -12,23 +12,11 @@ This project is a single-page React basic movie list app fetching movies from [T
 
 ## Badges
 
-Add badges from somewhere like: [shields.io](https://shields.io/)
-
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
-[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
-
-## Contributing
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-Please adhere to this project's `code of conduct`.
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/rgoshen/movies_list/blob/main/LICENSE)
 
 ## Demo
 
-Insert gif or link to demo
+[demo](/readme/images/movies_list.gif)
 
 ## Support
 
